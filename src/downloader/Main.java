@@ -68,6 +68,16 @@ public class Main extends Application {
 
             return null;
         }
+
+        @Override
+        protected void failed() {
+            System.out.println("Failed");
+        }
+
+        @Override
+        protected void succeeded() {
+            System.out.println("Succeded");
+        }
     }
 
     /**
