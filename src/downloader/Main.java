@@ -5,6 +5,8 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -60,7 +62,7 @@ public class Main extends Application {
                 while((count = inputStream.read(buffer)) > 0) {
                     outputStream.write(buffer,0,count);
                     fileRead += count;
-                    //updateProgress(fileRead, fileLength);
+                    updateProgress(fileRead, fileLength);
                 }
             }
 
@@ -80,6 +82,30 @@ public class Main extends Application {
         VBox root = new VBox();
         root.setPrefSize(500,500);
 
+        TextField textField = new TextField();
+        root.getChildren().addAll(textField);
+
+        /**
+         * For every new url a new progressbar will be created
+         * And a new download thread will start
+         */
+        textField.setOnAction(event -> {
+            Task<Void> task = new Downloader(textField.getText());
+            ProgressBar progressBar = new ProgressBar();
+            progressBar.setPrefWidth(350);
+
+            /**
+             * Bind the updating of the UI of the progressbar with downloading
+             */
+            progressBar.progressProperty().bind(task.progressProperty());
+            root.getChildren().add(progressBar);
+
+            textField.clear();
+
+            Thread thread = new Thread();
+            thread.setDaemon(true);
+            thread.start();
+        });
 
         return root;
     }
