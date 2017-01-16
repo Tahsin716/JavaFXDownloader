@@ -7,8 +7,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Main extends Application {
 
@@ -43,8 +47,21 @@ public class Main extends Application {
 
             /**
              * try with resources:
-             *
+             * InputStream is opened, and OutputStream is used to write the file
              */
+            try(InputStream inputStream = urlConnection.getInputStream();
+                OutputStream outputStream = Files.newOutputStream(Paths.get("filedownloaded" + extension))) {
+
+                long fileRead = 0L;
+                byte[] buffer = new byte[10000];
+                int count;
+
+                while((count = inputStream.read(buffer)) > 0) {
+                    outputStream.write(buffer,0,count);
+                    fileRead += count;
+                    //updateProgress(fileRead, fileLength);
+                }
+            }
 
             return null;
         }
