@@ -5,6 +5,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.InputStream;
@@ -65,6 +66,22 @@ public class Main extends Application {
 
             return null;
         }
+    }
+
+    /**
+     * Creates a VBox and returns the root
+     * it contains a TextField for url input
+     * and ProgressBar for determining the file size downloaded
+     *
+     * @return
+     */
+
+    private Parent createContent() {
+        VBox root = new VBox();
+        root.setPrefSize(500,500);
+
+
+        return root;
     }
 
     @Override
