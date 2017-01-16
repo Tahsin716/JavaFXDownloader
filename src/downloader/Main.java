@@ -7,16 +7,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.net.URL;
+import java.net.URLConnection;
+
 public class Main extends Application {
 
 
-    private class Donwloader extends Task<Void> {
+    private class Downloader extends Task<Void> {
 
         //URL of the file to be downloaded
         private String url;
 
         //Constructor of the Downloader class that receives url as an argument
-        public Donwloader(String url) {
+        public Downloader(String url) {
             this.url = url;
         }
 
@@ -34,6 +37,15 @@ public class Main extends Application {
          */
         @Override
         protected Void call() throws Exception {
+            String extension = url.substring(url.lastIndexOf("."), url.length());
+            URLConnection urlConnection = new URL(url).openConnection();
+            long fileLength = urlConnection.getContentLength();
+
+            /**
+             * try with resources:
+             *
+             */
+
             return null;
         }
     }
