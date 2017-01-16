@@ -16,7 +16,7 @@ public class Main extends Application {
         private String url;
 
         //Constructor of the Downloader class that receives url as an argument
-        public Downloader(String url) {
+        public Donwloader(String url) {
             this.url = url;
         }
 
