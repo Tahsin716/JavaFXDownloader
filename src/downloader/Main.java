@@ -2,7 +2,6 @@ package downloader;
 
 import javafx.application.Application;
 import javafx.concurrent.Task;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
@@ -39,7 +38,6 @@ public class Main extends Application {
          * Reads the file and writes it in the directory provided
          * Updates the progressbar with respect to the size of bytes downloaded
          *
-         * @return
          * @throws Exception
          */
         @Override
@@ -85,7 +83,6 @@ public class Main extends Application {
      * it contains a TextField for url input
      * and ProgressBar for determining the file size downloaded
      *
-     * @return
      */
 
     private Parent createContent() {
@@ -122,9 +119,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("downloader_ui.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setTitle("JavaFX Downloader");
+        primaryStage.setScene(new Scene(createContent()));
         primaryStage.show();
     }
 
